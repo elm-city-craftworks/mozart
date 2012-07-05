@@ -4,28 +4,17 @@ require_relative "../lib/mozart/composite"
 
 describe Mozart::Composite do
   let(:parts) do
-    { :a => MiniTest::Mock.new,
-      :b => MiniTest::Mock.new }
+    { :a => Struct.new(:bar).new(:returned_by_bar),
+      :b => Struct.new(:foo).new(:returned_by_foo) }
   end
 
   it "knows what messages it can receive" do
     composite = Mozart::Composite.new
 
-    parts[:a].expect(:respond_to?, false, [:foo])
-    parts[:b].expect(:respond_to?, true,  [:foo])
-
-    parts[:a].expect(:respond_to?, true,  [:bar])
-    parts[:b].expect(:respond_to?, false, [:bar])
-
-    parts[:a].expect(:respond_to?, false, [:baz])
-    parts[:b].expect(:respond_to?, false, [:baz])
-
     parts.values.each { |part| composite << part }
 
-    assert composite.receives?(:foo)
-    assert composite.receives?(:bar)
-    refute composite.receives?(:baz)
-
-    parts.values.each { |part| part.verify }
+    assert composite.receives?(:foo), "Expected composite to receive foo"
+    assert composite.receives?(:bar), "Expected composite to receive bar"
+    refute composite.receives?(:baz), "Did not expect composite to receive baz"
   end
 end
