@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["gregory.t.brown@gmail.com"]
   gem.description   = %q{An experimental tool implementing mixins via composition}
   gem.summary       = %q{An experimental tool implementing mixins via composition}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/elm-city-craftworks/mozart"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
