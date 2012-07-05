@@ -18,6 +18,9 @@ describe Mozart::Composite do
     part_a.expect(:respond_to?, false, [:baz])
     part_b.expect(:respond_to?, false, [:baz])
 
+    composite << part_a
+    composite << part_b
+
     assert composite.receives?(:foo)
     assert composite.receives?(:bar)
     refute composite.receives?(:baz)
