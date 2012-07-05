@@ -36,4 +36,17 @@ describe Mozart::Composite do
       composite.dispatch(:baz)
     end
   end
+  
+  it "raises an exception for messages with multiple recipients" do
+    composite << Mozart.value(:foo).new(:foo => true)
+    composite << Mozart.value(:foo).new(:foo => false)
+
+    assert_raises(Mozart::AmbiguousMessageError) do
+      composite.dispatch(:foo) 
+    end
+
+    assert_raises(Mozart::AmbiguousMessageError) do
+      composite.receives?(:foo)
+    end
+  end
 end

@@ -1,7 +1,9 @@
 module Mozart
+  AmbiguousMessageError = Class.new(StandardError)
+
   class Composite
     def initialize
-      @parts = []
+      self.parts = []
     end
 
     def <<(part)
@@ -9,23 +11,27 @@ module Mozart
     end
 
     def receives?(message)
-      !!reciever(message)
+      !!recipient(message)
     end
 
     def dispatch(message, *a, &b)
-      target = reciever(message) 
-
-      raise NotImplementedError unless target
+      target = recipient(message)
       
+      raise NotImplementedError unless target
+
       target.public_send(message, *a, &b)
     end
 
+    def recipient(message)
+      target, *rest = parts.select { |part| part.respond_to?(message) }
+
+      raise AmbiguousMessageError unless rest.empty?
+
+      target
+    end
+ 
     private
 
-    def reciever(message)
-      parts.find { |part| part.respond_to?(message) } 
-    end
-
-    attr_reader :parts
+    attr_accessor :parts
   end
 end
