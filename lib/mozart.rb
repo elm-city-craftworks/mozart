@@ -1,5 +1,3 @@
-require "mozart/version"
-
-module Mozart
-  # Your code goes here...
-end
+require_relative "mozart/version"
+require_relative "mozart/composite"
+require_relative "mozart/value"
