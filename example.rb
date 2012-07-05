@@ -1,5 +1,9 @@
 require_relative "lib/mozart"
 
+# this generates a wrapper which will delegate
+# methods to a target object, but prevents
+# public calls to anything not in the whitelist
+
 Stack = Mozart.context(:push, :pop) do
   def each
     target.reverse_each { |e| yield(e) }
