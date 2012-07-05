@@ -9,12 +9,22 @@ module Mozart
         params.each { |k,v| data[k] = v }
       end
 
+      def ==(other)
+        self.class == other.class && data == other.data
+      end
+
+      alias_method :eql?, :==
+
+      def hash
+        data.hash
+      end
+
       field_names.each do |name|
         define_method(name) { data[name] }
         define_method("#{name}=") { |v| data[name] = v }
       end
 
-      private
+      protected
 
       attr_accessor :data
     end
