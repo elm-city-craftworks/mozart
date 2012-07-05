@@ -6,7 +6,9 @@ module Mozart
 
         self.data = {}
 
-        params.each { |k,v| data[k] = v }
+        params.each { |k,v| data[k] = v.freeze }
+
+        data.freeze
       end
 
       def ==(other)
