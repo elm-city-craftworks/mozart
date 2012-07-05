@@ -25,6 +25,7 @@ p stack.sum
 stack.push(20)
 stack.push(50)
 
+p stack.sum
 
 class Person
   include Mozart::Composable
