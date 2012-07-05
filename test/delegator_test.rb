@@ -33,6 +33,5 @@ describe "Mozart.delegator" do
 
     pin1.distance(pin2).must_equal(10)
     pin1.short_name.must_equal("Home ...")
-
   end
 end

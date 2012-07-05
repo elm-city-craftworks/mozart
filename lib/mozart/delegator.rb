@@ -6,7 +6,7 @@ module Mozart
       define_method(:initialize) do |params|
         self.composite = Mozart::Composite.new
 
-        block.call(params).each do |feature|
+        instance_exec(params, &block).each do |feature|
           composite << feature
         end
       end
