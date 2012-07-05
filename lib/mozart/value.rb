@@ -7,8 +7,6 @@ module Mozart
         self.data = {}
 
         params.each { |k,v| data[k] = v }
-
-        instance_eval(&block) if block
       end
 
       def ==(other)
@@ -23,6 +21,7 @@ module Mozart
 
       field_names.each do |name|
         define_method(name) { data[name] }
+
         define_method("#{name}=") { |v| data[name] = v }
       end
 
