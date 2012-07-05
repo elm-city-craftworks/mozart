@@ -1,5 +1,5 @@
 module Mozart
-  def self.value(*field_names)
+  def self.value(*field_names, &block)
     Class.new do
       define_method(:initialize) do |params={}|
         raise ArgumentError unless (params.keys - field_names).empty?
@@ -7,6 +7,8 @@ module Mozart
         self.data = {}
 
         params.each { |k,v| data[k] = v }
+
+        instance_eval(&block) if block
       end
 
       def ==(other)
