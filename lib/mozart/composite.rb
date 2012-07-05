@@ -22,6 +22,8 @@ module Mozart
       target.public_send(message, *a, &b)
     end
 
+    private
+
     def recipient(message)
       target, *rest = parts.select { |part| part.respond_to?(message) }
 
@@ -29,8 +31,6 @@ module Mozart
 
       target
     end
- 
-    private
 
     attr_accessor :parts
   end
