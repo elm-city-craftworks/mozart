@@ -9,15 +9,22 @@ module Mozart
     end
 
     def receives?(message)
-      parts.any? { |part| part.respond_to?(message) }
+      !!reciever(message)
     end
 
     def dispatch(message)
-      parts.find { |part| part.respond_to?(message) }
-           .public_send(message)
+      target = reciever(message) 
+
+      raise NotImplementedError unless target
+      
+      target.public_send(message)
     end
 
     private
+
+    def reciever(message)
+      parts.find { |part| part.respond_to?(message) } 
+    end
 
     attr_reader :parts
   end
