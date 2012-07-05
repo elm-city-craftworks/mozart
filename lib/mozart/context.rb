@@ -1,8 +1,9 @@
 module Mozart
-  def self.context(*accepted_methods)
+  def self.context(*accepted_methods, &class_definition)
     Class.new do
-      def initialize(target)
+      define_method :initialize do |target|
         self.target = target
+        instance_eval(&class_definition) if class_definition
       end
 
       define_method :respond_to_missing? do |m, *a|
