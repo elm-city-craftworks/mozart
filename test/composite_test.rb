@@ -1,13 +1,14 @@
 require "minitest/autorun"
 
 require_relative "../lib/mozart/composite"
+require_relative "../lib/mozart/value"
 
 describe Mozart::Composite do
   let(:composite) { Mozart::Composite.new }
 
   let(:parts) do
-    [ Struct.new(:foo).new(:returned_by_foo),
-      Struct.new(:bar).new(:returned_by_bar) ]
+    [ Mozart.value(:foo).new(:foo => :returned_by_foo),
+      Mozart.value(:bar).new(:bar => :returned_by_bar) ]
   end
 
   it "knows what messages it can receive" do
