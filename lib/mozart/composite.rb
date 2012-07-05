@@ -12,12 +12,12 @@ module Mozart
       !!reciever(message)
     end
 
-    def dispatch(message)
+    def dispatch(message, *a, &b)
       target = reciever(message) 
 
       raise NotImplementedError unless target
       
-      target.public_send(message)
+      target.public_send(message, *a, &b)
     end
 
     private

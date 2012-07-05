@@ -23,6 +23,11 @@ describe Mozart::Composite do
 
     composite.dispatch(:foo).must_equal(:returned_by_foo)
     composite.dispatch(:bar).must_equal(:returned_by_bar)
+
+    # an example using arguments
+    composite.dispatch(:foo=, :updated_foo_return)
+
+    composite.dispatch(:foo).must_equal(:updated_foo_return)
   end
 
   it "raises an exception for unhandled messages" do

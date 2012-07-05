@@ -4,8 +4,8 @@ require File.expand_path('../lib/mozart/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Gregory Brown"]
   gem.email         = ["gregory.t.brown@gmail.com"]
-  gem.description   = %q{An experimental tool implementing mixins via composition}
-  gem.summary       = %q{An experimental tool implementing mixins via composition}
+  gem.description   = %q{Tools for making object composition easier}
+  gem.summary       = %q{Tools for making object composition easier}
   gem.homepage      = "https://github.com/elm-city-craftworks/mozart"
 
   gem.files         = `git ls-files`.split($\)
