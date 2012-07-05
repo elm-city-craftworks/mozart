@@ -17,7 +17,9 @@ module Mozart
     def dispatch(message, *a, &b)
       target = recipient(message)
       
-      raise NotImplementedError unless target
+      unless target
+        raise NotImplementedError, "No recipient implements #{message}" 
+      end
 
       target.public_send(message, *a, &b)
     end

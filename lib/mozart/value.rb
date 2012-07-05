@@ -2,7 +2,7 @@ module Mozart
   def self.value(*field_names, &block)
     Class.new do
       define_method(:initialize) do |params={}|
-        raise ArgumentError unless (params.keys - field_names).empty?
+        raise ArgumentError unless params.keys == field_names
 
         self.data = {}
 
@@ -21,8 +21,6 @@ module Mozart
 
       field_names.each do |name|
         define_method(name) { data[name] }
-
-        define_method("#{name}=") { |v| data[name] = v }
       end
 
       protected
