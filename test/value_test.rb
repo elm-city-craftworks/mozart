@@ -8,6 +8,9 @@ describe "Mozart.value" do
     pos1 = pos_builder.new(:x => 10, :y => 20)
     pos1.x.must_equal(10)
     pos1.y.must_equal(20)
+
+    pos1.x = 20
+    pos1.x.must_equal(20)
   end
 
   it "can be converted into a Hash object" do

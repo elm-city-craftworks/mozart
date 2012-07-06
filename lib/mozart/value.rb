@@ -27,7 +27,7 @@ module Mozart
 
       field_names.each do |name|
         define_method(name)       { __data__[name] }
-        define_method("#{name}=") { __data__[name] }
+        define_method("#{name}=") { |value| __data__[name] = value }
       end
 
       protected
