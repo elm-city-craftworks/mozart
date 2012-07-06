@@ -7,9 +7,9 @@ class BasicCalculator
   def initialize
     array = []
 
-    features << C(:push, array)
+    features << X(:push, array)
 
-    _(:data, C(:reduce, :clear, array))
+    _(:data, X(:reduce, :clear, array))
   end
 
   def sum

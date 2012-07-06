@@ -4,7 +4,7 @@ module Mozart
   module Composable
     private
 
-    def C(*method_names, target)
+    def X(*method_names, target)
       Mozart.context(*method_names).new(target)
     end
 
