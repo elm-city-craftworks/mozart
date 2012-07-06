@@ -4,14 +4,15 @@ class BasicCalculator
   include Mozart::Composable
 
   def initialize
-    data = []
+    array = []
 
-    features  << Mozart.context(:push).new(data)
-    internals << Mozart.context(:reduce, :clear).new(data)
+    features << Mozart.context(:push).new(array)
+
+    _(:data, Mozart.context(:reduce, :clear).new(array))
   end
 
   def sum
-    _(:reduce, 0, :+).tap { _(:clear) }
+    _(:data).reduce(0, :+).tap { _(:data).clear }
   end
 end
 
@@ -26,6 +27,7 @@ stack.push(20)
 stack.push(50)
 
 p stack.sum
+
 
 class Person
   include Mozart::Composable

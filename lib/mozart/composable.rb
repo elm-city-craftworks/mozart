@@ -8,12 +8,21 @@ module Mozart
       @features ||= Mozart::Composite.new
     end
 
-    def internals
-      @internals ||= Mozart::Composite.new
-    end
+    def _(*args)
+      @__internals__ ||= {}
 
-    def _(m, *a, &b)
-      internals.dispatch(m, *a, &b)
+      case args.count
+      when 1
+        @__internals__[args.first]
+      when 2
+        if @__internals__.key?(args.first)
+          raise "Single assignment only!"
+        else
+          @__internals__[args.first] = args.last
+        end
+      else
+        raise ArgumentError
+      end
     end
 
     def respond_to_missing?(m, *a, &b)
