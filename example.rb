@@ -2,13 +2,14 @@ require_relative "lib/mozart"
 
 class BasicCalculator
   include Mozart::Composable
+  include Mozart::SingleAssignment
 
   def initialize
     array = []
 
-    features << Mozart.context(:push).new(array)
+    features << C(:push, array)
 
-    _(:data, Mozart.context(:reduce, :clear).new(array))
+    _(:data, C(:reduce, :clear, array))
   end
 
   def sum
@@ -33,9 +34,7 @@ class Person
   include Mozart::Composable
 
   def initialize(params)
-    data = Mozart.value(:name, :email).new(params) 
-
-    features << data
+    features << V(:name, :email, params) 
   end
 
   def to_s

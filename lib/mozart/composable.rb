@@ -4,25 +4,16 @@ module Mozart
   module Composable
     private
 
-    def features
-      @features ||= Mozart::Composite.new
+    def C(*method_names, target)
+      Mozart.context(*method_names).new(target)
     end
 
-    def _(*args)
-      @__internals__ ||= {}
+    def V(*field_names, params)
+      Mozart.value(*field_names).new(params)
+    end
 
-      case args.count
-      when 1
-        @__internals__[args.first]
-      when 2
-        if @__internals__.key?(args.first)
-          raise "Single assignment only!"
-        else
-          @__internals__[args.first] = args.last
-        end
-      else
-        raise ArgumentError
-      end
+    def features
+      @features ||= Mozart::Composite.new
     end
 
     def respond_to_missing?(m, *a, &b)
