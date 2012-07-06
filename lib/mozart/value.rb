@@ -4,11 +4,11 @@ module Mozart
       define_method(:initialize) do |params={}|
         raise ArgumentError unless params.keys == field_names
 
-        self.data = {}
+        self.__data__ = {}
 
-        params.each { |k,v| data[k] = v.freeze }
+        params.each { |k,v| __data__[k] = v.freeze }
 
-        data.freeze
+        __data__.freeze
       end
 
       def ==(other)
@@ -18,16 +18,16 @@ module Mozart
       alias_method :eql?, :==
 
       def hash
-        data.hash
+        __data__.hash
       end
 
       field_names.each do |name|
-        define_method(name) { data[name] }
+        define_method(name) { __data__[name] }
       end
 
       protected
 
-      attr_accessor :data
+      attr_accessor :__data__
     end
   end
 end
