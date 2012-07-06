@@ -15,6 +15,10 @@ module Mozart
         self.class == other.class && __data__ == other.__data__
       end
 
+      def to_hash
+        Marshal.load(Marshal.dump(__data__))
+      end
+
       alias_method :eql?, :==
 
       def hash
@@ -22,7 +26,8 @@ module Mozart
       end
 
       field_names.each do |name|
-        define_method(name) { __data__[name] }
+        define_method(name)       { __data__[name] }
+        define_method("#{name}=") { __data__[name] }
       end
 
       protected
