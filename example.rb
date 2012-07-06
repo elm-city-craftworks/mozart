@@ -1,8 +1,7 @@
 require_relative "lib/mozart"
 
 class BasicCalculator
-  include Mozart::Composable
-  include Mozart::SingleAssignment
+  include Mozart::Environment
 
   def initialize
     array = []
