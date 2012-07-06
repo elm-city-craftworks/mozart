@@ -6,13 +6,13 @@ module Mozart
 
         self.__data__ = {}
 
-        params.each { |k,v| __data__[k] = v.freeze }
+        params.each { |k,v| __data__[k] = v }
 
-        __data__.freeze
+        __data__
       end
 
       def ==(other)
-        self.class == other.class && data == other.data
+        self.class == other.class && __data__ == other.__data__
       end
 
       alias_method :eql?, :==
