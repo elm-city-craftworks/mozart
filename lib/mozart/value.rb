@@ -2,7 +2,7 @@ module Mozart
   def self.value(*field_names, &block)
     Class.new do
       define_method(:initialize) do |params={}|
-        raise ArgumentError unless params.keys == field_names
+        raise ArgumentError unless (params.keys - field_names).empty?
 
         self.__data__ = {}
 
